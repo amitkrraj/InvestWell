@@ -1,7 +1,7 @@
 const express = require("express");
-const calculateStepUpSip = require("../controller/tasks");
+const sipStepUpCalculator = require("../controller/tasks");
 const router = express.Router();
 
-router.post("/calculate", calculateStepUpSip);
+router.post("/sipStepUpCalculator", sipStepUpCalculator);
 
 module.exports = router;

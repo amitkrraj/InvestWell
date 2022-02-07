@@ -1,31 +1,38 @@
-// actual calculation
-const calculate = data => {
-    let { monthlySavings, yearlyIncrement, investmentPeriod, rateOfReturn } = data;
+const calculateSip = inputData => {
+    const { monthlySavings, yearlyIncrement, investmentPeriod, rateOfReturn } = inputData;
     const months = investmentPeriod * 12;
     const rate = rateOfReturn / 12;
 
-    let sip = [0];
+    let graph = [{ period: 0, sip: 0, sipStepUp: 0 }];
+    let sipStepUpSavings = monthlySavings;
     let sipCumulation = 0;
-    let j = 1;
-    for (let i = 1; i <= months; i++) {
-        sipCumulation += +monthlySavings * Math.pow(1 + rate / 100, i);
-        if (i % 12 == 0) sip[j++] = Math.floor(sipCumulation);
-    }
+    let sipStepUpCumulation = 0;
 
-    let sipStepUp = [0];
-    sipCumulation = 0;
-    j = 1;
     for (let i = 1; i <= months; i++) {
         if (i != 1) {
             if (i % 12 == 1) {
-                monthlySavings += yearlyIncrement;
+                sipStepUpSavings += yearlyIncrement;
             }
         }
         sipCumulation += monthlySavings * Math.pow(1 + rate / 100, i);
-        if (i % 12 == 0) sipStepUp[j++] = Math.floor(sipCumulation);
+        sipStepUpCumulation += sipStepUpSavings * Math.pow(1 + rate / 100, i);
+
+        if (i % 12 == 0) {
+            graph.push({
+                period: i / 12,
+                sip: Math.floor(sipCumulation),
+                sipStepUp: Math.floor(sipStepUpCumulation)
+            });
+        }
     }
 
-    return { sip: sip, sipStepUp: sipStepUp };
+    const data = [
+        { investment: inputData.monthlySavings },
+        { period: inputData.investmentPeriod },
+        { yearlyIncrement: inputData.yearlyIncrement },
+        { sipStepUpCumulation: Math.floor(sipStepUpCumulation) }
+    ];
+    return { data: data, graph: graph };
 };
 
-module.exports = calculate;
+module.exports = calculateSip;
