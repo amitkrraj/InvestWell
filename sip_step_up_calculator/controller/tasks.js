@@ -13,7 +13,7 @@ const calculateStepUpSip = (req, res) => {
       rateOfReturn <= 0
   ) {
       res.status(400).send({ error: "Invalid Input" });
-  } else res.send({ result: calculate(req.body) });
+  } else res.send(calculate(req.body));
 };
 
 module.exports = calculateStepUpSip;
