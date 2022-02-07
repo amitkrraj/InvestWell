@@ -30,7 +30,7 @@ const calculateSipStepUp = inputData => {
         { investment: inputData.monthlySavings },
         { period: inputData.investmentPeriod },
         { yearlyIncrement: inputData.yearlyIncrement },
-        { sipStepUpCumulation: Math.floor(sipStepUpCumulation) }
+        { totalSipStepUpAmount: Math.floor(sipStepUpCumulation) }
     ];
     return { data: data, graph: graph };
 };
