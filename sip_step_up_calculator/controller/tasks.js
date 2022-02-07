@@ -1,4 +1,4 @@
-const calculateSip = require("../services/tasks");
+const { calculateSipStepUp } = require("../services/tasks");
 
 const sipStepUpCalculator = (req, res) => {
     const data = req.body;
@@ -13,7 +13,7 @@ const sipStepUpCalculator = (req, res) => {
         data.rateOfReturn <= 0
     )
         res.status(400).send({ error: "Invalid Input" });
-    else res.send(calculateSip(data));
+    else res.send(calculateSipStepUp(data));
 };
 
-module.exports = sipStepUpCalculator;
+module.exports = { sipStepUpCalculator };

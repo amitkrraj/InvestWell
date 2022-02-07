@@ -1,4 +1,4 @@
-const calculateSip = inputData => {
+const calculateSipStepUp = inputData => {
     const { monthlySavings, yearlyIncrement, investmentPeriod, rateOfReturn } = inputData;
     const months = investmentPeriod * 12;
     const rate = rateOfReturn / 12;
@@ -35,4 +35,4 @@ const calculateSip = inputData => {
     return { data: data, graph: graph };
 };
 
-module.exports = calculateSip;
+module.exports = { calculateSipStepUp };
