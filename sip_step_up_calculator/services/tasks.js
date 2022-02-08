@@ -19,16 +19,19 @@ const calculateSipStepUp = inputData => {
         sipStepUpCumulation += sipStepUpSavings * Math.pow(1 + rate / 100, i);
 
         graph.push({
-                month: i,
-                sip: Math.floor(sipCumulation),
-                sipStepUp: Math.floor(sipStepUpCumulation)
-            });
+            month: i,
+            sip: Math.floor(sipCumulation),
+            sipStepUp: Math.floor(sipStepUpCumulation)
+        });
     }
 
-    const data = { monthlySavings,
-         investmentPeriod ,
-         yearlyIncrement ,
-         totalSipStepUpAmount: Math.floor(sipStepUpCumulation) };
+    const data = {
+        monthlySavings,
+        investmentPeriod,
+        yearlyIncrement,
+        totalSipStepUpAmount: Math.floor(sipStepUpCumulation)
+    };
+
     return { data, graph };
 };
 
