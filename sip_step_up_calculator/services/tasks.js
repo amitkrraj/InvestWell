@@ -9,12 +9,13 @@ const calculateSipStepUp = inputData => {
     let sipStepUpCumulation = 0;
 
     for (let i = 1; i <= months; i++) {
+        sipCumulation += monthlySavings * Math.pow(1 + rate / 100, i);
+
         if (i != 1) {
             if (i % 12 == 1) {
                 sipStepUpSavings += yearlyIncrement;
             }
         }
-        sipCumulation += monthlySavings * Math.pow(1 + rate / 100, i);
         sipStepUpCumulation += sipStepUpSavings * Math.pow(1 + rate / 100, i);
 
         if (i % 12 == 0) {
@@ -27,12 +28,12 @@ const calculateSipStepUp = inputData => {
     }
 
     const data = [
-        { investment: inputData.monthlySavings },
-        { period: inputData.investmentPeriod },
-        { yearlyIncrement: inputData.yearlyIncrement },
+        { monthlySavings },
+        { investmentPeriod },
+        { yearlyIncrement },
         { totalSipStepUpAmount: Math.floor(sipStepUpCumulation) }
     ];
-    return { data: data, graph: graph };
+    return { data, graph };
 };
 
 module.exports = { calculateSipStepUp };
