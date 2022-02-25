@@ -12,7 +12,6 @@ module.exports = function (sequelize, DataTypes) {
         broadObjective: DataTypes.STRING(30),
         portfolioObjective: DataTypes.STRING(25)
     }, {
-        tableName: 'objectives',
-        timestamps: true
+        tableName: 'objectives'
     })
 }

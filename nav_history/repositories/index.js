@@ -1,13 +1,12 @@
 const db = require('../models')
-const category = () => {
+const getCategory = async (attributes) => {
     const result = await db.objectives.findAll({
-        attributes: ['objectiveid', 'objectiveName']
+        attributes: [attributes],
+        group: [attributes]
     })
     return result
 }
 
 module.exports = {
-    category
+    getCategory
 }
-
-

@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const sipCalculatorCtrl = require('../controllers/sipCalculator')
-const marketDataCtrl = require('../controllers/index')
+const marketDataCtrl = require('../controllers')
 
 router.post('/sipCalculator', sipCalculatorCtrl.sipCalculator)
 router.post('/sipStepUpCalculator', sipCalculatorCtrl.sipStepUpCalculator)
