@@ -1,4 +1,4 @@
-const { calculateSipStepUp } = require("../services/tasks");
+const { calculateSipStepUp } = require("../services/index");
 
 const sipStepUpCalculator = (req, res) => {
     const data = req.body;

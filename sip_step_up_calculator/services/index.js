@@ -3,7 +3,7 @@ const calculateSipStepUp = inputData => {
     const months = investmentPeriod * 12;
     const rate = rateOfReturn / 12;
 
-    let graph = [{ month: 0, sip: 0, sipStepUp: 0 }];
+    let graph = [];
     let sipStepUpSavings = monthlySavings;
     let sipCumulation = 0;
     let sipStepUpCumulation = 0;

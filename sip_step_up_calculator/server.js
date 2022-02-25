@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const constants = require("./constants/serverConstants.json");
-const { router } = require("./routes/tasks");
+const router = require("./routes/index");
 
 const app = express();
 
