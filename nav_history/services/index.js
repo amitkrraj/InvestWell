@@ -10,8 +10,8 @@ const getCategory = async () => {
     return await marketDataRepo.getCategory(attributes)
 }
 
-const getschemesDetails = async () => {
-    const data = await marketDataRepo.getschemesDetails()
+const getschemesDetails = async requestOptions => {
+    const data = await marketDataRepo.getschemesDetails(requestOptions)
     return data
 }
 

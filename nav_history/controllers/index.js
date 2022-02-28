@@ -9,7 +9,8 @@ const getAmcName = async (req, res) => {
             message: RESPONSE_MSG.SUCCESS,
             result: result
         })
-    } catch (exception) {
+    }
+    catch (exception) {
         res.json({
             status: STATUS.FAILED,
             message: RESPONSE_MSG.FAILED,
@@ -26,7 +27,8 @@ const getCategory = async (req, res) => {
             message: RESPONSE_MSG.SUCCESS,
             result: result
         })
-    } catch (exception) {
+    }
+    catch (exception) {
         res.json({
             status: STATUS.FAILED,
             message: RESPONSE_MSG.FAILED,
@@ -37,13 +39,22 @@ const getCategory = async (req, res) => {
 
 const getschemesDetails = async (req, res) => {
     try {
-        const result = await marketDataService.getschemesDetails()
+        const { schid, fsid } = req.query
+        if(!schid || schid<0 || !fsid || fsid<0){
+            return res.json({
+                status: STATUS.FAILED,
+                message: RESPONSE_MSG.FAILED,
+                result: {}
+            })
+        }
+        const result = await marketDataService.getschemesDetails(req.query)
         res.json({
             status: STATUS.SUCCESS,
             message: RESPONSE_MSG.SUCCESS,
             result: result
         })
-    } catch (exception) {
+    }
+    catch (exception) {
         res.json({
             status: STATUS.FAILED,
             message: RESPONSE_MSG.FAILED,
