@@ -10,17 +10,17 @@ const getCategory = async () => {
     return await marketDataRepo.getCategory(attributes)
 }
 
-const getSchemesDetails = async (requestOptions) => {
-    return await marketDataRepo.getSchemesDetails(requestOptions)
+const getDateAndNav = async (requestOptions) => {
+    return await marketDataRepo.getDateAndNav(requestOptions)
 }
 
-const getNavHistory = async requestOptions => {
-    return await marketDataRepo.getNavHistory(requestOptions)
+const getSchemeDetails = async (requestOptions) => {
+    return await marketDataRepo.getSchemeDetails(requestOptions)
 }
 
 module.exports = {
     getFunds,
     getCategory,
-    getSchemesDetails,
-    getNavHistory
+    getDateAndNav,
+    getSchemeDetails
 }

@@ -37,7 +37,7 @@ const getCategory = async (req, res) => {
     }
 }
 
-const getSchemesDetails = async (req, res) => {
+const getNavHistory = async (req, res) => {
     try {
         const { schid, fsid } = req.query
         if (!schid || schid < 0 || !fsid || fsid < 0) {
@@ -47,11 +47,12 @@ const getSchemesDetails = async (req, res) => {
                 result: {}
             })
         }
-        const result = await marketDataService.getSchemesDetails(req.query)
+        const dateAndNav = await marketDataService.getDateAndNav(req.query)
+        const schemeDetails = await marketDataService.getSchemeDetails(req.query)
         res.json({
             status: STATUS.SUCCESS,
             message: RESPONSE_MSG.SUCCESS,
-            result: result
+            result: { dateAndNav, schemeDetails }
         })
     }
     catch (exception) {
@@ -63,33 +64,8 @@ const getSchemesDetails = async (req, res) => {
     }
 }
 
-const getNavHistory = async (req, res) => {
-    try {
-        if (!req.query.schid || req.query.schid < 0) {
-            return res.json({
-                status: STATUS.FAILED,
-                message: RESPONSE_MSG.FAILED,
-                result: {}
-            })
-        }
-        const result = await marketDataService.getNavHistory(req.query)
-        res.json({
-            status: STATUS.SUCCESS,
-            message: RESPONSE_MSG.SUCCESS,
-            result: result
-        })
-    } catch (exception) {
-        res.json({
-            status: STATUS.FAILED,
-            message: RESPONSE_MSG.FAILED,
-            result: {}
-        })
-    }
-}
-
 module.exports = {
     getFunds,
     getCategory,
-    getSchemesDetails,
     getNavHistory
 }
