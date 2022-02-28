@@ -25,8 +25,19 @@ const getschemesDetails = async (attributes) => {
     return result
 }
 
+const navDetail = async(attributes) =>{
+    const result = await db.sequelize.query(
+       'select navDate, nav from navhistory INNER JOIN schemes ON navhistory.schid = schemes.schid',
+       {
+           type: db.Sequelize.QueryTypes.SELECT
+       }
+    )
+    return result
+}
+
 module.exports = {
     getAmcName,
     getCategory,
-    getschemesDetails
+    getschemesDetails,
+    navDetail
 }
