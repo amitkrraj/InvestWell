@@ -7,6 +7,8 @@ router.post('/sipCalculator', sipCalculatorCtrl.sipCalculator)
 router.post('/sipStepUpCalculator', sipCalculatorCtrl.sipStepUpCalculator)
 router.post('/sipDelayCalculator', sipCalculatorCtrl.sipDelayCalculator)
 
+router.get('/getAmcName', marketDataCtrl.getAmcName)
 router.get('/getCategory', marketDataCtrl.getCategory)
+router.get('/getschemesDetails', marketDataCtrl.getschemesDetails)
 
 module.exports = router
