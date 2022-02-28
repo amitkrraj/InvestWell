@@ -1,8 +1,8 @@
 const marketDataRepo = require('../repositories')
 
-const getAmcName = async () => {
+const getFunds = async () => {
     const attributes = ['fundid', 'name']
-    return await marketDataRepo.getAmcName(attributes)
+    return await marketDataRepo.getFunds(attributes)
 }
 
 const getCategory = async () => {
@@ -10,13 +10,17 @@ const getCategory = async () => {
     return await marketDataRepo.getCategory(attributes)
 }
 
-const getschemesDetails = async requestOptions => {
-    const data = await marketDataRepo.getschemesDetails(requestOptions)
-    return data
+const getSchemesDetails = async (requestOptions) => {
+    return await marketDataRepo.getSchemesDetails(requestOptions)
+}
+
+const getNavHistory = async requestOptions => {
+    return await marketDataRepo.getNavHistory(requestOptions)
 }
 
 module.exports = {
-    getAmcName,
+    getFunds,
     getCategory,
-    getschemesDetails
+    getSchemesDetails,
+    getNavHistory
 }
