@@ -6,11 +6,20 @@ const getFunds = async (attributes) => {
     })
 }
 
-const getCategory = async (attributes) => {
+const getCategoryName = async (attributes) => {
     return await db.objectives.findAll({
-        attributes: [['AUMObjective', 'Category']],
-        group: attributes
+        attributes: attributes,
+        group: 'AUMObjective'
     })
+}
+
+const getSchemeName = async (options) => {
+    return await db.sequelize.query(
+        `SELECT schemes.name, schemes.fundid, objectives.AUMObjective FROM schemes JOIN objectives ON schemes.objectiveid = objectives.objectiveid WHERE schemes.fundid = ${options.fundid} AND objectives.AUMObjective = '${options.category}'`,
+        {
+            type: db.Sequelize.QueryTypes.SELECT
+        }
+    )
 }
 
 const getSchemeDetails = async (attributes) => {
@@ -22,7 +31,7 @@ const getSchemeDetails = async (attributes) => {
     )
 }
 
-const getDateAndNav = async attributes => {
+const getDateAndNav = async (attributes) => {
     return await db.sequelize.query(
         `select navDate as Date, nav as NAV from navhistory INNER JOIN schemes ON navhistory.schid = schemes.schid where schemes.schid = ${attributes.schid} and navDate between '${attributes.fromDate}' and '${attributes.toDate}'`,
         {
@@ -31,7 +40,6 @@ const getDateAndNav = async attributes => {
     )
 }
 
-//where schemedetails.schid = ${attributes.schid}
 const getBenchmark = async attributes => {
     return await db.sequelize.query(
         `select navDate as Date, nav as NAV from navhistory  inner join schemedetails on schemedetails.schBroadBenchmark = navhistory.schid where schemedetails.schid = ${attributes.schid} and navDate between '${attributes.fromDate}' and '${attributes.toDate}'`,
@@ -43,7 +51,8 @@ const getBenchmark = async attributes => {
 
 module.exports = {
     getFunds,
-    getCategory,
+    getCategoryName,
+    getSchemeName,
     getDateAndNav,
     getBenchmark,
     getSchemeDetails

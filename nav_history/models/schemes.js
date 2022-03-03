@@ -1,19 +1,40 @@
 module.exports = function (sequelize, DataTypes) {
-    return sequelize.define('schemes',{
-        fundid: DataTypes.INTEGER,
+    return sequelize.define('schemes', {
+        fundid: DataTypes.INTEGER(11),
         schid: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.INTEGER(11),
             primaryKey: true,
-            autoInceament: false
+            field: 'schid'
         },
-        name: DataTypes.STRING(150),
-        iwellCode: DataTypes.STRING(20),
-        camsCode1: DataTypes.STRING(15),
-        camsCode2: DataTypes.STRING(15),
-        fsid: DataTypes.STRING(50),
-        objectiveid: DataTypes.INTEGER,
-        productType: DataTypes.CHAR(2)
-    },{
+        name: {
+            type: DataTypes.STRING(150),
+            field: 'name'
+        },
+        iwellCode: {
+            type: DataTypes.STRING(20),
+            field: 'iwellCode'
+        },
+        camsCode1: {
+            type: DataTypes.STRING(15),
+            field: 'camsCode1'
+        },
+        camsCode2: {
+            type: DataTypes.STRING(15),
+            field: 'camsCode2'
+        },
+        fsid: {
+            type: DataTypes.STRING(50),
+            field: 'fsid'
+        },
+        objectiveid: {
+            type: DataTypes.INTEGER(5),
+            field: 'objectiveid'
+        },
+        productType: {
+            type: DataTypes.CHAR(2),
+            field: 'productType'
+        },
+    }, {
         tableName: 'schemes'
     })
 }

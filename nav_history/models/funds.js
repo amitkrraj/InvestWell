@@ -1,35 +1,97 @@
-module.exports = function (sequelize, DataTypes) {
-    return sequelize.define('funds', {
+module.exports = function (Sequelize, DataTypes) {
+    return funds = Sequelize.define('funds', {
         fundid: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.INTEGER(11),
+            allowNull: false,
             primaryKey: true,
-            autoIncrement: true
+            autoIncrement: true,
+            field: 'fundid'
         },
-        name: DataTypes.STRING(150),
-        product: DataTypes.STRING(2),
-        iwellCode: {
-            type: DataTypes.STRING(15),
-            allowNull: true,
-            unique: true
+        name: {
+            type: DataTypes.STRING(150),
+            field: 'name'
         },
-        nseAMCCode: DataTypes.STRING(25),
-        AMCCode: DataTypes.STRING(25),
-        gstin: DataTypes.STRING(30),
-        mfuAMCCode: DataTypes.STRING(25),
-        fundsNetKey: DataTypes.STRING(5),
-        billingName: DataTypes.STRING(150),
-        pan: DataTypes.STRING(30),
-        sac: DataTypes.STRING(30),
-        cin: DataTypes.STRING(21),
-        address1: DataTypes.STRING(255),
-        address2: DataTypes.STRING(255),
-        address3: DataTypes.STRING(255),
-        city: DataTypes.STRING(25),
-        stateCode: DataTypes.STRING(10),
-        pin: DataTypes.STRING(8),
-        phone: DataTypes.STRING(20),
-        email: DataTypes.STRING(150),
-        state: DataTypes.STRING(25)
+        product: {
+            type: DataTypes.STRING(2),
+            field: 'product'
+        },
+        iwellCode:  {
+            type:DataTypes.STRING(15),
+            unique: true,
+            field: 'iwellCode'
+        },
+        nseAMCCode: {
+            type: DataTypes.STRING(25),
+            field: 'nseAMCCode'
+        },
+        AMCCode: {
+            type: DataTypes.STRING(25),
+            field: 'AMCCode'
+        },
+        gstin: {
+            type: DataTypes.STRING(30),
+            field: 'gstin'
+        },
+        mfuAMCCode: {
+            type: DataTypes.STRING(25),
+            field: 'mfuAMCCode'
+        },
+        fundsNetKey: {
+            type: DataTypes.STRING(5),
+            field: 'fundsNetKey'
+        },
+        billingName: {
+            type: DataTypes.STRING(150),
+            field: 'billingName'
+        },
+        pan: {
+            type: DataTypes.STRING(30),
+            field: 'pan'
+        },
+        sac: {
+            type: DataTypes.STRING(30),
+            field: 'sac'
+        },
+        cin: {
+            type: DataTypes.STRING(21),
+            field: 'cin'
+        },
+        address1: {
+            type: DataTypes.STRING(255),
+            field: 'address1'
+        },
+        address2: {
+            type: DataTypes.STRING(255),
+            field: 'address2'
+        },
+        address3: {
+            type: DataTypes.STRING(255),
+            field: 'address3'
+        },
+        city: {
+            type: DataTypes.STRING(25),
+            field: 'city'
+        },
+        stateCode: {
+            type: DataTypes.STRING(10),
+            field: 'stateCode'
+        },
+        pin: {
+            type: DataTypes.STRING(8),
+            field: 'pin'
+        },
+        phone: {
+            type: DataTypes.STRING(20),
+            fidl: 'phone'
+        },
+        email: {
+            type: DataTypes.STRING(150),
+            field: 'email'
+        },
+        state: {
+            type: DataTypes.STRING(25),
+            field: 'state'
+        }
     }, {
         tableName: 'funds'
     })
