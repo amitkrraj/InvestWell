@@ -1,20 +1,19 @@
 module.exports = function (sequelize, DataTypes) {
-    const { STRING, INTEGER, CHAR } = DataTypes
     return sequelize.define('schemes',{
-        fundid: INTEGER,
+        fundid: DataTypes.INTEGER,
         schid: {
-            type: INTEGER,
+            type: DataTypes.INTEGER,
             primaryKey: true,
             autoInceament: false
         },
-        name: STRING(150),
-        iwellCode: STRING(20),
-        camsCode1: STRING(15),
-        camsCode2: STRING(15),
-        fsid: STRING(50),
-        objectiveid: INTEGER,
-        productType: CHAR(2)
+        name: DataTypes.STRING(150),
+        iwellCode: DataTypes.STRING(20),
+        camsCode1: DataTypes.STRING(15),
+        camsCode2: DataTypes.STRING(15),
+        fsid: DataTypes.STRING(50),
+        objectiveid: DataTypes.INTEGER,
+        productType: DataTypes.CHAR(2)
     },{
-            tableName: 'schemes'
+        tableName: 'schemes'
     })
 }

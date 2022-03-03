@@ -7,8 +7,10 @@ router.post('/sipCalculator', sipCalculatorCtrl.sipCalculator)
 router.post('/sipStepUpCalculator', sipCalculatorCtrl.sipStepUpCalculator)
 router.post('/sipDelayCalculator', sipCalculatorCtrl.sipDelayCalculator)
 
-router.get('/getFunds', marketDataCtrl.getAmcName)
+router.get('/getFunds', marketDataCtrl.getFunds)
 router.get('/getCategory', marketDataCtrl.getCategory)
-router.get('/getschemesDetails', marketDataCtrl.getschemesDetails)
+//router.get('/getSchemes', marketDataCtrl.getSchemeName)
+router.get('/getNavHistory', marketDataCtrl.getNavHistory)
 
 module.exports = router
+
