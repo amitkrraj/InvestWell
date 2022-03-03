@@ -20,9 +20,9 @@ const getFunds = async (req, res) => {
     }
 }
 
-const getCategoryName = async (req, res) => {
+const getCategory = async (req, res) => {
     try {
-        const result = await marketDataService.getCategoryName()
+        const result = await marketDataService.getCategory()
         res.json({
             status: STATUS.SUCCESS,
             message: RESPONSE_MSG.SUCCESS,
@@ -39,17 +39,17 @@ const getCategoryName = async (req, res) => {
 }
 
 
-const getSchemeName = async (req, res) => {
+const getScheme = async (req, res) => {
     try {
         const { fundid, category } = req.query
-        if (fundid <= 0 || typeof category != "string"){
+        if (fundid <= 0 || parseInt(fundid) == NaN || typeof category != "string"){
             return res.json({
                 status: STATUS.FAILED,
                 message: RESPONSE_MSG.FAILED,
                 result: {}
             })
         }
-        const result = await marketDataService.getSchemeName(req.query);
+        const result = await marketDataService.getScheme(req.query)
         res.json({
             status: STATUS.SUCCESS,
             message: RESPONSE_MSG.SUCCESS,
@@ -65,9 +65,9 @@ const getSchemeName = async (req, res) => {
   }
 }
 
-const isValidDate = (dateString) => {
-    return (moment(dateString, 'YYYY-MM-DD', true).isValid() || moment(dateString, 'YYYY-M-DD', true).isValid() ||
-        moment(dateString, 'YYYY-MM-D', true).isValid())
+const isValidDate = (date) => {
+    return (moment(date, 'YYYY-MM-DD', true).isValid() || moment(date, 'YYYY-M-DD', true).isValid() ||
+        moment(date, 'YYYY-MM-D', true).isValid())
 }
 
 const getNavHistory = async (req, res) => {
@@ -105,7 +105,7 @@ const getNavHistory = async (req, res) => {
 
 module.exports = {
     getFunds,
-    getCategoryName,
-    getSchemeName,
+    getCategory,
+    getScheme,
     getNavHistory
 }
