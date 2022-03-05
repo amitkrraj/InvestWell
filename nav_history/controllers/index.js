@@ -61,6 +61,23 @@ const getScheme = async (req, res) => {
   }
 }
 
+const getBenchmark = async (req, res) => {
+  try {
+    const result = await marketDataService.getBenchmark()
+    res.json({
+      status: STATUS.SUCCESS,
+      message: RESPONSE_MSG.SUCCESS,
+      result: result
+    })
+  } catch (exception) {
+    res.json({
+      status: STATUS.FAILED,
+      message: RESPONSE_MSG.FAILED,
+      result: {}
+    })
+  }
+}
+
 const isValidDate = date => {
   return (moment(date, 'YYYY-MM-DD', true).isValid() || moment(date, 'YYYY-M-DD', true).isValid() ||
         moment(date, 'YYYY-MM-D', true).isValid())
@@ -76,9 +93,9 @@ const getNavHistory = async (req, res) => {
         message: RESPONSE_MSG.FAILED,
         result: {}
       })
-    }
+    } 
     const dateAndNav = await marketDataService.getDateAndNav(req.query)
-    const benchmark = await marketDataService.getBenchmark(req.query)
+    const benchmark = await marketDataService.getDateAndNavBenchmark(req.query)
     const schemeDetails = await marketDataService.getSchemeDetails(req.query)
     res.json({
       status: STATUS.SUCCESS,
@@ -102,5 +119,6 @@ module.exports = {
   getFunds,
   getCategory,
   getScheme,
+  getBenchmark,
   getNavHistory
 }

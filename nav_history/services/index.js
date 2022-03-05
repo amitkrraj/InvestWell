@@ -14,12 +14,16 @@ const getScheme = async (options) => {
   return await marketDataRepo.getScheme(options)
 }
 
+const getBenchmark = async (options) => {
+  return await marketDataRepo.getBenchmark(options)
+}
+
 const getDateAndNav = async (options) => {
   return await marketDataRepo.getDateAndNav(options)
 }
 
-const getBenchmark = async (options) => {
-  return await marketDataRepo.getBenchmark(options)
+const getDateAndNavBenchmark = async (options) => {
+  return await marketDataRepo.getDateAndNavBenchmark(options)
 }
 
 const getSchemeDetails = async (options) => {
@@ -30,7 +34,8 @@ module.exports = {
   getFunds,
   getCategory,
   getScheme,
-  getDateAndNav,
   getBenchmark,
+  getDateAndNav,
+  getDateAndNavBenchmark,
   getSchemeDetails
 }

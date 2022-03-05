@@ -15,7 +15,19 @@ const getCategory = async attributes => {
 
 const getScheme = async options => {
   return await db.sequelize.query(
-    `SELECT schemes.name, schemes.fundid, objectives.AUMObjective FROM schemes JOIN objectives ON schemes.objectiveid = objectives.objectiveid WHERE schemes.fundid = ${options.fundid} AND objectives.AUMObjective = '${options.category}'`,
+    `SELECT schemes.name, schemes.fundid, objectives.AUMObjective FROM schemes 
+    JOIN objectives ON schemes.objectiveid = objectives.objectiveid 
+    WHERE schemes.fundid = ${options.fundid} AND objectives.AUMObjective = '${options.category}'`,
+    {
+      type: db.Sequelize.QueryTypes.SELECT
+    }
+  )
+}
+
+const getBenchmark = async attributes =>{
+  return await db.sequelize.query(
+    `select distinct schBroadBenchmark, schemes.name from schemedetails 
+    JOIN schemes on schemedetails.schBroadBenchmark = schemes.schid`,
     {
       type: db.Sequelize.QueryTypes.SELECT
     }
@@ -24,7 +36,11 @@ const getScheme = async options => {
 
 const getSchemeDetails = async attributes => {
   return await db.sequelize.query(
-    `select name as 'Scheme Name', corpus as 'Corpus (Cr.)', 6Month as '6 Month', 1Year as '1 Year', 2Year as '2 Year', 3Year as '3 Year', 5Year as '5 Year', 10Year as '10 Year' from schemes INNER JOIN factsheets ON schemes.fsid = factsheets.fsid INNER JOIN schemereturns ON schemes.schid = schemereturns.schid where schemes.schid = ${attributes.schid} and schemes.fsid = ${attributes.fsid}`,
+    `select name as 'Scheme Name', corpus as 'Corpus (Cr.)', 6Month as '6 Month', 1Year as '1 Year', 
+    2Year as '2 Year', 3Year as '3 Year', 5Year as '5 Year', 10Year as '10 Year' from schemes 
+    JOIN factsheets ON schemes.fsid = factsheets.fsid 
+    JOIN schemereturns ON schemes.schid = schemereturns.schid
+    where schemes.schid = ${attributes.schid}`,
     {
       type: db.Sequelize.QueryTypes.SELECT
     }
@@ -33,27 +49,33 @@ const getSchemeDetails = async attributes => {
 
 const getDateAndNav = async attributes => {
   return await db.sequelize.query(
-    `select navDate as Date, nav as NAV from navhistory INNER JOIN schemes ON navhistory.schid = schemes.schid where schemes.schid = ${attributes.schid} and navDate between '${attributes.fromDate}' and '${attributes.toDate}'`,
+    `select navDate as Date, nav as NAV from navhistory
+     where navhistory.schid = ${attributes.schid} and navDate 
+     between '${attributes.fromDate}' and '${attributes.toDate}'`,
     {
       type: db.Sequelize.QueryTypes.SELECT
     }
   )
 }
 
-const getBenchmark = async attributes => {
+const getDateAndNavBenchmark = async attributes => {
   return await db.sequelize.query(
-    `select navDate as Date, nav as NAV from navhistory  inner join schemedetails on schemedetails.schBroadBenchmark = navhistory.schid where schemedetails.schid = ${attributes.schid} and navDate between '${attributes.fromDate}' and '${attributes.toDate}'`,
+    `select navDate as Date, nav as NAV from navhistory 
+    JOIN schemedetails on schemedetails.schBroadBenchmark = navhistory.schid 
+    where schemedetails.schBroadBenchmark = ${attributes.schBroadBenchmark} and navDate 
+    between '${attributes.fromDate}' and '${attributes.toDate}'`,
     {
       type: db.Sequelize.QueryTypes.SELECT
     }
   )
 }
-
+//where schemedetails.schid = ${attributes.schid} and navDate 
 module.exports = {
   getFunds,
   getCategory,
   getScheme,
-  getDateAndNav,
   getBenchmark,
+  getDateAndNav,
+  getDateAndNavBenchmark,
   getSchemeDetails
 }
